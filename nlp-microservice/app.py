@@ -32,6 +32,10 @@ matcher.add("SKILL_MATCHER", patterns)
 
 app = Flask(__name__)
 
+@app.route('/')
+def health_check():
+    return jsonify({"status": "ok", "message": "NLP microservice is running."})
+
 # This endpoint is for processing RESUMES
 @app.route('/extract', methods=['POST'])
 def extract_entities():
