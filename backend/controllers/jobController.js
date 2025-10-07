@@ -56,6 +56,7 @@ exports.findMatchesForJob = async (req, res) => {
         res.status(500).json({ message: 'Server error.' });
     }
 };
+// Final clean version of analyzeJobDescription
 exports.analyzeJobDescription = async (req, res) => {
     const { description } = req.body;
     if (!description) {
@@ -64,10 +65,13 @@ exports.analyzeJobDescription = async (req, res) => {
 
     try {
         const nlpApiUrl = process.env.SPACY_SERVICE_URL ? `${process.env.SPACY_SERVICE_URL}/analyze_jd` : 'http://localhost:5002/analyze_jd';
-        const nlpResponse = await axios.post(nlpApiUrl, ... {
+        
+        const nlpResponse = await axios.post(nlpApiUrl, {
             text: description
         });
-        res.json(nlpResponse.data); // Forward the response { skills: [...] } to the frontend
+        
+        res.json(nlpResponse.data);
+
     } catch (error) {
         console.error("Error calling NLP service for JD analysis:", error.message);
         res.status(500).json({ message: "Failed to analyze job description." });

@@ -31,17 +31,25 @@ const JobsPage = () => {
         setMatchResult(null);
 
         try {
-            // 1. Get required skills from our intelligent backend
             const response = await api.post('/jobs/analyze', {
                 description: jobDescription
             });
+
+            // NEW: Add this check to prevent crashes
+            if (!response.data || !Array.isArray(response.data.skills)) {
+                // This will be caught by the catch block below
+                throw new Error("Invalid response from the server.");
+            }
+            
             const requiredSkills = new Set(response.data.skills);
 
-            // 2. Compare with resume skills
             const resumeSkillsSet = new Set(resumeSkills.map(s => s.toLowerCase()));
+            
             const matchedSkills = [...requiredSkills].filter(skill => resumeSkillsSet.has(skill));
             const missingSkills = [...requiredSkills].filter(skill => !resumeSkillsSet.has(skill));
+            
             const score = requiredSkills.size > 0 ? (matchedSkills.length / requiredSkills.size) * 100 : 0;
+            
             setMatchResult({
                 score: Math.round(score),
                 matched: matchedSkills,
@@ -50,7 +58,7 @@ const JobsPage = () => {
 
         } catch (error) {
             console.error("Error calculating match:", error);
-            alert("Failed to analyze the job description. Please try again.");
+            alert("Failed to analyze the job description. Please ensure all local services are running and check the backend console for errors.");
         } finally {
             setIsLoading(false);
         }
