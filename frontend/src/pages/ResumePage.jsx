@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useResume } from '../hooks/useResume'; // Import the hook
+import api from '../services/api';
 
 const ResumePage = () => {
     const [file, setFile] = useState(null);
@@ -21,7 +21,7 @@ const ResumePage = () => {
             // NOTE: Add authentication token if you secured the route
             // const { token } = JSON.parse(localStorage.getItem('user'));
             // const config = { headers: { 'Authorization': `Bearer ${token}` } };
-            const res = await axios.post('http://localhost:5001/api/resumes/upload', formData);
+            const res = await api.post('/resumes/upload', formData);
             
             setProcessedResume(res.data.resume);
             // Save skills and text to global context

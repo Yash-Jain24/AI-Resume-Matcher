@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useResume } from '../hooks/useResume';
+import api from '../services/api';
 
 const mockJobs = [
     { id: 1, title: "Frontend Developer", description: "Looking for a React expert with experience in TypeScript and GraphQL. Must know Node.js for server-side rendering." },
@@ -32,19 +32,16 @@ const JobsPage = () => {
 
         try {
             // 1. Get required skills from our intelligent backend
-            const response = await axios.post('http://localhost:5001/api/jobs/analyze', {
+            const response = await api.post('/jobs/analyze', {
                 description: jobDescription
             });
             const requiredSkills = new Set(response.data.skills);
 
             // 2. Compare with resume skills
             const resumeSkillsSet = new Set(resumeSkills.map(s => s.toLowerCase()));
-            
             const matchedSkills = [...requiredSkills].filter(skill => resumeSkillsSet.has(skill));
             const missingSkills = [...requiredSkills].filter(skill => !resumeSkillsSet.has(skill));
-            
             const score = requiredSkills.size > 0 ? (matchedSkills.length / requiredSkills.size) * 100 : 0;
-            
             setMatchResult({
                 score: Math.round(score),
                 matched: matchedSkills,

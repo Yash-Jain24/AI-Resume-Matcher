@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
-
-const API_URL = 'http://localhost:5001/api/auth';
+import api from '../services/api';
 
 const LoginPage = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -19,7 +17,7 @@ const LoginPage = () => {
     const payload = isRegister ? { name, email, password } : { email, password };
 
     try {
-      const { data } = await axios.post(`${API_URL}${endpoint}`, payload);
+      const { data } = await api.post(`/auth${endpoint}`, payload);
       login(data);
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
