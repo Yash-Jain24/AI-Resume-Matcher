@@ -7,8 +7,6 @@ npm-debug.log
 /backend/build
 /backend/uploads
 node_modules
-package.json
-package-lock.json
 
 # Python
 /nlp-microservice/__pycache__/
