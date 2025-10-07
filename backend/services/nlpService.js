@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // The URL of our local Python service
-const SPACY_SERVICE_URL = "http://localhost:5002/extract";
+const SPACY_SERVICE_URL = process.env.SPACY_SERVICE_URL || "http://localhost:5002/extract";
 
 async function extractKeywordsWithNLP(text) {
     console.log("Using local spaCy NLP Microservice...");

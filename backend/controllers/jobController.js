@@ -63,7 +63,8 @@ exports.analyzeJobDescription = async (req, res) => {
     }
 
     try {
-        const nlpResponse = await axios.post('http://localhost:5002/analyze_jd', {
+        const nlpApiUrl = process.env.SPACY_SERVICE_URL ? `${process.env.SPACY_SERVICE_URL}/analyze_jd` : 'http://localhost:5002/analyze_jd';
+        const nlpResponse = await axios.post(nlpApiUrl, ... {
             text: description
         });
         res.json(nlpResponse.data); // Forward the response { skills: [...] } to the frontend
