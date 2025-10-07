@@ -1,0 +1,345 @@
+/* --- 1. MODERN THEME & ROOT VARIABLES --- */
+:root {
+  --primary-bg: #121212;
+  --secondary-bg: #1E1E1E;
+  --card-bg: rgba(45, 45, 45, 0.6);
+  --primary-accent: #BB86FC;
+  --secondary-accent: #03DAC6;
+  --primary-text: #FFFFFF;
+  --secondary-text: #B3B3B3;
+  --border-radius: 12px;
+  --box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* --- 2. AUTH PAGE STYLING --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.auth-card {
+  background-color: var(--secondary-bg);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 420px; 
+  text-align: center;
+  box-sizing: border-box;
+}
+.auth-card h1 {
+  color: var(--primary-accent);
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+/* FIX: Ensure the form stacks its children vertically */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds a little space between form elements */
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary-bg);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  color: var(--primary-text);
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.25);
+}
+
+/* FIX: Restore style for the register link */
+.auth-toggle {
+  margin-top: 20px;
+  cursor: pointer;
+  color: var(--secondary-text);
+  transition: color 0.3s;
+  font-size: 1.1rem;
+}
+.auth-toggle span {
+  color: var(--primary-accent);
+  font-weight: bold;
+  transition: opacity 0.3s;
+  opacity: 0.8;
+}
+
+.auth-toggle:hover {
+  color: var(--primary-accent);
+}
+
+/* FIX: Restore the bordered-button look for the guest login */
+.guest-login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: transparent;
+  border: 1px solid var(--secondary-accent);
+  color: var(--secondary-accent);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  box-sizing: border-box;
+}
+.guest-login-btn:hover {
+  background-color: var(--secondary-accent);
+  color: var(--primary-bg);
+}
+
+/* --- 3. UNIVERSAL BUTTON STYLES --- */
+.modern-button {
+  width: auto;
+  min-width: 150px;
+  padding: 15px 30px;
+  background: linear-gradient(90deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+  color: #000;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 1rem;
+}
+.modern-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(187, 134, 252, 0.3);
+}
+.w-full { width: 100%; }
+.logout-btn {
+  background: none;
+  border: 1px solid var(--primary-accent);
+  color: var(--primary-accent);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.logout-btn:hover {
+  background: var(--primary-accent);
+  color: var(--primary-bg);
+}
+
+/* --- 4. NAVBAR & DASHBOARD LAYOUT --- */
+.navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background: var(--secondary-bg);
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.navbar-brand {
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  /* Gradient text effect */
+  background: linear-gradient(90deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Increased space between links */
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--secondary-text);
+  font-weight: 500;
+  padding: 8px 20px; /* Padding to create a button-like feel */
+  border-radius: 20px; /* Creates the pill shape */
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nav-links a::after {
+  content: none;
+}
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--primary-text);
+}
+.nav-links a.active {
+  background-color: var(--primary-accent);
+  color: var(--primary-bg); /* Dark text on the bright background */
+  font-weight: 600;
+}
+.page-content {
+  padding: 2rem;
+  overflow-y: auto;
+}
+/* FIX: New container to center content on Profile and Resume pages */
+.page-container {
+  max-width: 960px;
+  margin: 0 auto; /* This centers the container */
+}
+.page-header {
+  color: var(--primary-accent);
+  border-bottom: 2px solid var(--secondary-accent);
+  padding-bottom: 10px;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+/* --- 5. CARDS & SKILL TAGS --- */
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--box-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* FIX: Use gap for consistent spacing between skill tags */
+  gap: 12px;
+  margin-top: 1rem;
+}
+.skill-tag {
+  background: var(--secondary-bg);
+  color: var(--secondary-accent);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--secondary-accent);
+}
+
+/* --- 6. JOBS PAGE REFINEMENTS --- */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+.job-list {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  height: 65vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.job-item {
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
+}
+.job-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+.job-item.selected {
+  background-color: var(--primary-accent);
+  color: var(--primary-bg);
+  font-weight: bold;
+  border-color: var(--secondary-accent);
+}
+/* Styling for the JD box to match the job-list box */
+.job-description {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px); /* This adds the glassy effect */
+  -webkit-backdrop-filter: blur(10px);
+}
+.job-description textarea {
+  width: 100%;
+  /* FIX: Increased default height of the JD textarea */
+  min-height: 200px; 
+  background: var(--secondary-bg);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  color: var(--primary-text);
+  padding: 15px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.job-description textarea:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.25);
+}
+.match-results-container {
+  /* THIS is the property that controls the space. */
+  /* Increase or decrease this value to change the spacing. */
+  margin-top: 2.5rem; 
+}
+.calculate-match-area {
+  margin-top: 1.5rem; 
+}
+/* FIX: Restore the grid layout for the skills analysis */
+.skills-analysis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+/* FIX: New class to style the individual matched/missing skill boxes */
+.skills-box {
+  background-color: var(--secondary-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+}
+.skills-box h4 { 
+  margin-top: 0;
+  color: var(--primary-accent); 
+  border-bottom: 1px solid var(--secondary-accent);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Adds space between list items */
+}
+.skills-list li {
+  background: var(--primary-bg);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .jobs-grid, .skills-analysis {
+    grid-template-columns: 1fr; /* Stack to 1 column on mobile */
+  }
+}

@@ -1,0 +1,19 @@
+# Node.js
+/backend/node_modules
+/frontend/node_modules
+/backend/.env
+/frontend/.env
+npm-debug.log
+/backend/build
+/backend/uploads
+node_modules
+package.json
+package-lock.json
+
+# Python
+/nlp-microservice/__pycache__/
+/nlp-microservice/.venv
+/nlp-microservice/venv
+
+# General
+.DS_Store
