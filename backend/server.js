@@ -15,6 +15,13 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.error(err));
 
+app.get('/', (req, res) => {
+    res.json({ 
+        status: 'ok', 
+        message: 'AI Resume Matcher API is running.' 
+    });
+});
+
 // API Routes
 app.use('/api/auth', require('./routes/authRoutes')); 
 app.use('/api/resumes', require('./routes/resumeRoutes'));
