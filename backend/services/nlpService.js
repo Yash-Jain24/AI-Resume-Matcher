@@ -1,13 +1,13 @@
-import axios from 'axios';
+const axios = require('axios'); // Changed back to require
 
-// 1. Define the base URL from the environment variable or localhost for development
+// Define the base URL from the environment variable or localhost for development
 const SPACY_BASE_URL = process.env.SPACY_SERVICE_URL || "http://localhost:5002";
 
 async function extractKeywordsWithNLP(text) {
     console.log(`Using NLP Microservice at base: ${SPACY_BASE_URL}`);
 
     try {
-        // 2. Always append the correct endpoint path to the base URL
+        // Always append the correct endpoint path to the base URL
         const response = await axios.post(`${SPACY_BASE_URL}/extract`, { text });
         
         console.log("Extracted Name:", response.data.name);
@@ -22,6 +22,7 @@ async function extractKeywordsWithNLP(text) {
     }
 }
 
-export default {
+// FIX: Changed from `export default` back to `module.exports` for consistency
+module.exports = {
     extractKeywordsWithNLP
 };
