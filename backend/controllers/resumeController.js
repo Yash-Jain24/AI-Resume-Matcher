@@ -1,13 +1,19 @@
 const Resume = require('../models/Resume');
-const { parseResumeWithCpp } = require('../services/parserService');
 const { extractKeywordsWithNLP } = require('../services/nlpService');
+const pdf = require('pdf-parse'); // 1. Require pdf-parse directly
 
 exports.uploadResume = async (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ message: 'No file uploaded.' });
+    // 2. Check if req.file exists and has a buffer
+    if (!req.file || !req.file.buffer) {
+        return res.status(400).json({ message: 'No file uploaded or file is empty.' });
     }
+
     try {
-        const rawText = await parseResumeWithCpp(req.file.path);
+        // 3. Parse the PDF directly from the memory buffer
+        const pdfData = await pdf(req.file.buffer);
+        const rawText = pdfData.text;
+
+        // 4. The rest of the logic remains the same
         const { skills, name } = await extractKeywordsWithNLP(rawText);
 
         const newResume = new Resume({
