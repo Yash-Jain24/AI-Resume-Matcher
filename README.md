@@ -121,4 +121,4 @@ Licensed under the **MIT License**.
 ---
 
 ## 👨‍💻 Author
-[Github](https://github.com/Yash-Jain24) | [LinkedIn](https://www.linkedin.com/in/yashjain24)
+[Github](https://github.com/Yash-Jain24) | [LinkedIn](https://www.linkedin.com/in/yashjain2004/)
